@@ -1,12 +1,12 @@
 import React from 'react';
 import Counter from './Counter';
-import { counterActions } from '../modules';
+import { counterActions } from './CounterActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
 import './CounterList.css';
 
-const CounterList = ({ counters, increment, decrement, setColor, counterActions }) => {
+const CounterList = ({ counters, counterActions }) => {
   const counterList = counters.map(
     (counter, i) => (
       <Counter

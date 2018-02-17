@@ -1,11 +1,11 @@
 import React from 'react';
-import { counterActions } from '../modules';
+import { counterActions } from './CounterActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getRandomColor } from 'utils';
 import './Buttons.css';
 
-const Buttons = ({ remove, counterActions, dispatch }) => {
+const Buttons = ({ counterActions, dispatch }) => {
   return (
     <div className="Buttons">
       <div className="btn add" onClick={() => counterActions.create({color: getRandomColor()})}>
