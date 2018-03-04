@@ -18,6 +18,7 @@ const zipInputStream =
     .map(e => e.target.value)
     .filter(zip => zip.length === 5)
 
+
 const zipcodeStream =
   btnClickStream
     .withLatestFrom(zipInputStream, (click, zip) => zip)
@@ -34,21 +35,21 @@ const zipTemperatureStreamFactory = zip =>
     .fromPromise(getTemperature(zip))
     .map(({ main: { temp } }) => ({ temp, zip }));
 
-    zipcodeStream
-    .flatMap(zipTemperatureStreamFactory)
-    .forEach(({ zip, temp }) => {
-      const locationEle = document.createElement('div');
-      locationEle.id = `zip-${zip}`;
-      locationEle.classList.add('location');
-      const zipEle = document.createElement('p');
-      zipEle.classList.add('zip');
-      zipEle.innerText = zip;
-      const tempEle = document.createElement('p');
-      tempEle.classList.add('temp');
-      tempEle.innerHTML = `${temp}&deg;F`;
-      locationEle.appendChild(zipEle);
-      locationEle.appendChild(tempEle);
-      appContainer.appendChild(locationEle);
-      zipcodeInput.value = '';
-    });
-  
+zipcodeStream
+.flatMap(zipTemperatureStreamFactory)
+.forEach(({ zip, temp }) => {
+  const locationEle = document.createElement('div');
+  locationEle.id = `zip-${zip}`;
+  locationEle.classList.add('location');
+  const zipEle = document.createElement('p');
+  zipEle.classList.add('zip');
+  zipEle.innerText = zip;
+  const tempEle = document.createElement('p');
+  tempEle.classList.add('temp');
+  tempEle.innerHTML = `${temp}&deg;F`;
+  locationEle.appendChild(zipEle);
+  locationEle.appendChild(tempEle);
+  appContainer.appendChild(locationEle);
+  zipcodeInput.value = '';
+});
+
